@@ -38,7 +38,7 @@ if __name__ == '__main__':
                                     mu=mu,
                                     logvar=logvar)
                 MU, _ = loss_function_diff(mu_ave)
-
+                reconstructed_mu_ave = vae_ADHD.decoder.call(mu_ave,tf.math.unsorted_segment_mean(FC_final, closest_idx_all, num_segments=3))
                 reconstructed_mu_ave = tf.reshape(reconstructed_mu_ave, (reconstructed_mu_ave.shape[0], -1))
                 Recon_MU,Recon_MU_mse = loss_function_diff2(reconstructed_mu_ave)
 
